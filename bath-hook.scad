@@ -24,41 +24,41 @@ module bath_hook_front() {
   translate([0, -65, 45]) sphere(9);
 }
 
-module bath_hook_back() {
+module bath_hook_back(gap) {
   hull () {
-    translate([-19, 5.1, 1]) cube([38, 5, 89]);
-    translate([-19, 5.6, 0]) cube([38, 4, 1]);
-    translate([-20, 5.6, 1]) cube([40, 4.5, 89]);
-    translate([-14, 10.1, 0]) cube([28, 5, 1]);
-    translate([-15, 10.1, 1]) cube([30, 5, 79]);
+    translate([-19, gap, 1]) cube([38, 5, 89]);
+    translate([-19, gap+0.5, 0]) cube([38, 4, 1]);
+    translate([-20, gap+0.5, 1]) cube([40, 4.5, 89]);
+    translate([-14, gap+5, 0]) cube([28, 5, 1]);
+    translate([-15, gap+5, 1]) cube([30, 5, 79]);
   }
   hull() {
-    translate([-14, 10.1, 0]) cube([28, 14.5, 1]);
-    translate([-15, 10.1, 1]) cube([30, 14.5, 9]);
+    translate([-14, gap+5, 0]) cube([28, 14.5, 1]);
+    translate([-15, gap+5, 1]) cube([30, 14.5, 9]);
   }
   hull() {
-    translate([-14, 20.1, 1]) cube([28, 5, 28.5]);
-    translate([-14, 20.6, 0]) cube([28, 4, 30]);
-    translate([-15, 20.6, 1]) cube([30, 4, 28.5]);
+    translate([-14, gap+15, 1]) cube([28, 5, 28.5]);
+    translate([-14, gap+15.5, 0]) cube([28, 4, 30]);
+    translate([-15, gap+15.5, 1]) cube([30, 4, 28.5]);
   }
 }
 
-module bath_hook_connection() {
-  translate([-20, -5, 80]) cube([40, 15.1, 10]);
+module bath_hook_connection(gap) {
+  translate([-20, -5, 80]) cube([40, gap+10, 10]);
   hull() {
-    translate([-20, 2.55, 90])
+    translate([-20, gap/2, 90])
       rotate([0, 90, 0])
-        cylinder(h=40, d=14.1);
-    translate([-19.5, 2.55, 90])
+        cylinder(h=40, d=gap+9);
+    translate([-19.5, gap/2, 90])
       rotate([0, 90, 0])
-        cylinder(h=39, d=15.1);
+        cylinder(h=39, d=gap+10);
   }
 }
 
-module bath_hook() {
+module bath_hook(gap) {
   bath_hook_front();
-  bath_hook_back();
-  bath_hook_connection();
+  bath_hook_back(gap);
+  bath_hook_connection(gap);
 }
 
-bath_hook();
+bath_hook(gap=5.1);
