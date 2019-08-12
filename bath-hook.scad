@@ -24,6 +24,32 @@ module bath_hook_front() {
   translate([0, -65, 45]) sphere(9);
 }
 
+module bath_hook_second() {
+  h = 25 * (sqrt(13)/3 - 1) * 3 / 2;
+  q = 10 / sqrt(13);
+  hull() {
+    translate([-2, -10, 40+h]) cube([4, 8, 8]);
+    translate([-2, -50, 40+h+60]) cube([4, 8, 8]);
+    translate([-5, -10+q, 40+h]) cube([10, 4, 4]);
+    translate([-5, -50+q, 40+h+60]) cube([10, 4, 4]);
+  }
+  hull() {
+    translate([-5, -50+q, 40+h+60]) cube([10, 4, 20]);
+    translate([-2, -50, 40+h+60]) cube([4, 8, 20]);
+  }
+  difference() {
+    translate([-5, -35, 40]) cube([10, 34.5, h*2]);
+    translate([-8, -35, 40]) rotate([0, 90, 0]) cylinder(h=6, d1=60, d2=50, $fa=1);
+    translate([-10, -35, 40]) rotate([0, 90, 0]) cylinder(h=20, d=50, $fa=1);
+    translate([2, -35, 40]) rotate([0, 90, 0]) cylinder(h=6, d1=50, d2=60, $fa=1);
+  }
+  translate([0, -50+4, 40+h+60+20]) sphere(9);
+  hull() {
+    translate([-2, -20, 75]) cube([4, 19.5, 5]);
+    translate([-2, -10, 40+h]) cube([4, 8, 8]);
+  }
+}
+
 module bath_hook_back(gap) {
   hull () {
     translate([-19, gap, 1]) cube([38, 5, 89]);
@@ -57,6 +83,7 @@ module bath_hook_connection(gap) {
 
 module bath_hook(gap) {
   bath_hook_front();
+  bath_hook_second();
   bath_hook_back(gap);
   bath_hook_connection(gap);
 }
