@@ -88,4 +88,4 @@ module bath_hook(gap) {
   bath_hook_connection(gap);
 }
 
-bath_hook(gap=5.1);
+bath_hook(gap=6.1);
